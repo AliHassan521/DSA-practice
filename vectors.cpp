@@ -30,11 +30,17 @@ void print()
     //     cout << v[i] << " ";
     // }
 
-    // vector<int> v1(5); // 5 elements with value 0
-    // for (int i = 0; i < v1.size(); i++)
-    // {
-    //     cout << v1[i] << " ";
-    // }
+    vector<int> v1(5); // 5 elements with value 0
+    for (int i = 0; i < v1.size(); i++)
+    {
+        cout << v1[i] << " ";
+    }
+    cout << endl;
+    vector<int> v2(v1); // copy of v1
+    for (int i = 0; i < v2.size(); i++)
+    {
+        cout << v2[i] << " ";
+    }
 }
 
 int main()
