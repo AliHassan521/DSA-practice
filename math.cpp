@@ -4,6 +4,8 @@ using namespace std;
 
 int main()
 {
+
+    // time complexity is in O(log(n)) when number is divided by any number that become log base
     int n, sum = 0;
     cin >> n;
     int temp = n;
