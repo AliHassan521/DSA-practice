@@ -11,8 +11,19 @@ void fn()
     fn();
 }
 
+void fun(int n)
+{
+    if (cnt == n)
+        return;
+    cout << "Ali" << " ";
+    cnt++;
+    fun(n);
+}
+
 int main()
 {
     // a function that calls itself is called when a certain condition is met
     fn();
+    int n = 4;
+    fun(n);
 }
