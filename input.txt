@@ -1,8 +1,1 @@
-absbabcbv
-6
-a
-v
-b
-c
-s
-f
+int a=5;
