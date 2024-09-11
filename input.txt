@@ -1,1 +1,1 @@
-int a=5;
+float i = 1.5;

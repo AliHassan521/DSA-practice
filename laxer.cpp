@@ -1,46 +1,77 @@
 #include <iostream>
 #include <string>
-#include <cctype> // for isdigit, isalpha
 using namespace std;
 
-// Function to check if a word is a keyword
-bool isKeyword(const string &word)
+string keywords[] = {"int", "float", "if", "else", "while", "return"};
+
+char operators[] = {'+', '-', '*', '/', '='};
+
+char punctuations[] = {';', ',', '(', ')', '{', '}'};
+
+bool isKeyword(string word)
 {
-    return word == "int" || word == "if" || word == "else" || word == "while" || word == "return";
+    for (int i = 0; i < 6; i++)
+    {
+        if (word == keywords[i])
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
-// Function to check if a character is an operator
 bool isOperator(char c)
 {
-    return c == '+' || c == '-' || c == '*' || c == '/' || c == '=';
+    for (int i = 0; i < 5; i++)
+    {
+        if (c == operators[i])
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
-// Function to check if a character is punctuation
 bool isPunctuation(char c)
 {
-    return c == ';' || c == ',' || c == '(' || c == ')' || c == '{' || c == '}';
+    for (int i = 0; i < 6; i++)
+    {
+        if (c == punctuations[i])
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
-// Function to tokenize the input string
-void tokenize(const string &code)
+bool isLetter(char c)
 {
-    size_t length = code.length();
-    size_t i = 0;
+    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+}
+
+bool isDigit(char c)
+{
+    return (c >= '0' && c <= '9');
+}
+
+void tokenize(string code)
+{
+    int i = 0;
+    int length = code.length();
 
     while (i < length)
     {
-        // Skip spaces
-        if (isspace(code[i]))
+
+        if (code[i] == ' ')
         {
             i++;
             continue;
         }
 
-        // Check for keywords or identifiers (letters or underscores)
-        if (isalpha(code[i]) || code[i] == '_')
+        if (isLetter(code[i]))
         {
             string word = "";
-            while (i < length && (isalnum(code[i]) || code[i] == '_'))
+            while (i < length && (isLetter(code[i]) || isDigit(code[i]) || code[i] == '_'))
             {
                 word += code[i];
                 i++;
@@ -54,30 +85,30 @@ void tokenize(const string &code)
                 cout << "Identifier: " << word << endl;
             }
         }
-        // Check for numbers
-        else if (isdigit(code[i]))
+
+        else if (isDigit(code[i]))
         {
             string number = "";
-            while (i < length && isdigit(code[i]))
+            while (i < length && isDigit(code[i]))
             {
                 number += code[i];
                 i++;
             }
             cout << "Number: " << number << endl;
         }
-        // Check for operators
+
         else if (isOperator(code[i]))
         {
             cout << "Operator: " << code[i] << endl;
             i++;
         }
-        // Check for punctuations
+
         else if (isPunctuation(code[i]))
         {
             cout << "Punctuation: " << code[i] << endl;
             i++;
         }
-        // Unknown characters
+
         else
         {
             cout << "Unknown: " << code[i] << endl;
@@ -88,11 +119,10 @@ void tokenize(const string &code)
 
 int main()
 {
-    // Sample code to tokenize
+
     string code;
     getline(cin, code);
 
-    // Call the tokenize function
     tokenize(code);
 
     return 0;
