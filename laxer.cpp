@@ -4,15 +4,22 @@ using namespace std;
 
 string keywords[] = {"int", "float", "if", "else", "while", "return"};
 
-char operators[] = {'+', '-', '*', '/', '='};
+char operators[] = {'+', '-', '*', '/', '=', '<', '>', '!'};
 
-char punctuations[] = {';', ',', '(', ')', '{', '}'};
+char punctuations[] = {
+    ';',
+    ',',
+    '(',
+    ')',
+    '{',
+    '}',
+};
 
-bool isKeyword(string word)
+bool isKeyword(const string &word)
 {
-    for (int i = 0; i < 6; i++)
+    for (const string &keyword : keywords)
     {
-        if (word == keywords[i])
+        if (word == keyword)
         {
             return true;
         }
@@ -22,9 +29,9 @@ bool isKeyword(string word)
 
 bool isOperator(char c)
 {
-    for (int i = 0; i < 5; i++)
+    for (char op : operators)
     {
-        if (c == operators[i])
+        if (c == op)
         {
             return true;
         }
@@ -34,9 +41,9 @@ bool isOperator(char c)
 
 bool isPunctuation(char c)
 {
-    for (int i = 0; i < 6; i++)
+    for (char p : punctuations)
     {
-        if (c == punctuations[i])
+        if (c == p)
         {
             return true;
         }
@@ -54,21 +61,21 @@ bool isDigit(char c)
     return (c >= '0' && c <= '9');
 }
 
-void tokenize(string code)
+void tokenize(const string &code)
 {
     int i = 0;
     int length = code.length();
 
     while (i < length)
     {
-
+        // Skip spaces
         if (code[i] == ' ')
         {
             i++;
             continue;
         }
 
-        if (isLetter(code[i]))
+        if (isLetter(code[i]) || code[i] == '_')
         {
             string word = "";
             while (i < length && (isLetter(code[i]) || isDigit(code[i]) || code[i] == '_'))
@@ -89,8 +96,20 @@ void tokenize(string code)
         else if (isDigit(code[i]))
         {
             string number = "";
-            while (i < length && isDigit(code[i]))
+            bool hasDecimalPoint = false;
+            while (i < length && (isDigit(code[i]) || code[i] == '.'))
             {
+                if (code[i] == '.')
+                {
+                    if (hasDecimalPoint)
+                    {
+                        cout << "Invalid Number: " << number << code[i] << endl;
+                        number += code[i];
+                        i++;
+                        break;
+                    }
+                    hasDecimalPoint = true;
+                }
                 number += code[i];
                 i++;
             }
@@ -109,6 +128,17 @@ void tokenize(string code)
             i++;
         }
 
+        else if (isDigit(code[i]))
+        {
+            string invalidIdentifier = "";
+            while (i < length && (isDigit(code[i]) || isLetter(code[i]) || code[i] == '_'))
+            {
+                invalidIdentifier += code[i];
+                i++;
+            }
+            cout << "Invalid Identifier: " << invalidIdentifier << endl;
+        }
+
         else
         {
             cout << "Unknown: " << code[i] << endl;
@@ -119,11 +149,8 @@ void tokenize(string code)
 
 int main()
 {
-
     string code;
     getline(cin, code);
-
     tokenize(code);
-
     return 0;
 }

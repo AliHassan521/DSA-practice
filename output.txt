@@ -1,7 +1,5 @@
-Keyword: float
-Identifier: i
+Keyword: int
+Identifier: a
 Operator: =
-Number: 1
-Unknown: .
-Number: 5
+Number: 4
 Punctuation: ;
