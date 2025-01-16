@@ -258,6 +258,33 @@ void pat12(int n)
     }
 }
 
+void pat13(int n)
+{
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= n; j++)
+        {
+            cout << j;
+        }
+        cout << endl;
+    }
+}
+
+void pat14(int n)
+{
+    int count = 1;
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= n; j++)
+        {
+            cout << count++;
+        }
+        cout << endl;
+    }
+}
+
+
+
 int main()
 {
     int n;
@@ -273,5 +300,9 @@ int main()
     // pat9(n);
     // pat10(n);
     // pat11(n);
-    pat12(n);
+    // pat12(n);
+    pat14(n);
 }
+
+
+ 
