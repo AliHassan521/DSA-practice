@@ -26,11 +26,24 @@ int main(){
     // }
 
     // find unique element
-    int ans = 0;
-    for(int i = 0;i < n;i++){
-        ans = ans ^ arr[i];
+    // int ans = 0;
+    // for(int i = 0;i < n;i++){
+    //     ans = ans ^ arr[i];
+    // }
+    // cout << ans;
+    
+    // find duplicate element
+    vector<int> v;
+    sort(arr,arr + n);
+    int i = 0;
+    while(i + 1 < n){
+        if(arr[i] == arr[i + 1]){
+            v.push_back(arr[i]);
+        }
+        i++;
     }
-    cout << ans;
-
+    for(int i = 0;i < v.size();i++){
+        cout << v[i] << " ";
+    }   
     return 0;
 }
